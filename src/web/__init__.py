@@ -1,0 +1,1 @@
+from src.web.app import app
