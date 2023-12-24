@@ -1,5 +1,9 @@
 from src.components import client
 from bson import ObjectId
+from sumy.summarizers.luhn import LuhnSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.parsers.plaintext import PlaintextParser
 
 articlesCollection = client["NewsTok"]["articles"]
 # connecting to collection 
@@ -43,13 +47,20 @@ class Article:
                 "summary": self.summary
             })  
 
-    def getSummary(self):
+    def getSummary(self, sentences=4, language="english"):
         """
         Returns the summary of the article, if it does not already exist, 
         """
         
         if self.summary is None or self.summary == "":
-            raise NotImplementedError("Summarizing text method is not implemented yet")
+            parser = PlaintextParser.from_string(self.content, Tokenizer(language))
+            stemmer = Stemmer(language)
+            summarizer = Summarizer(stemmer)
+
+            self.summary = ""
+
+            for sentence in summarizer(parser.document, sentences):
+                self.summary += str(sentence) + " "
         
         return self.summary
         
