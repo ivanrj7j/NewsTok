@@ -12,12 +12,13 @@ class Article:
     """
     A model for an article, contains essential details and methods related to an article
     """
-    def __init__(self, url:str, title:str, content:str, author:str=None, summary:str=None) -> None:
+    def __init__(self, url:str, title:str, content:str, author:str=None, summary:str=None, cover:str=None) -> None:
         self.url = url
         self.title = title
         self.content = content
         self.author = author
         self.summary = summary
+        self.cover = cover
 
     @classmethod
     def fromUUID(self, uuid:str):
@@ -32,7 +33,7 @@ class Article:
         if articleData is None:
             raise ModuleNotFoundError("The given article doesnt exist in the db")
         
-        return self(articleData["url"], articleData["title"], articleData["content"], articleData["author"], articleData["summary"])
+        return self(articleData["url"], articleData["title"], articleData["content"], articleData["author"], articleData["summary"], articleData["cover"])
     
     def register(self):
         """
@@ -44,7 +45,8 @@ class Article:
                 "title": self.title,
                 "content": self.content,
                 "author": self.author,
-                "summary": self.summary
+                "summary": self.summary,
+                "cover": self.cover
             })  
 
     def getSummary(self, sentences=4, language="english"):
