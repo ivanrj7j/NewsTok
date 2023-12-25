@@ -77,6 +77,10 @@ The source code is organized into two main parts:
     - `fetcher.py`: Generic article fetching functionality. Used as a parent class for other targetted fetchers
     - `scheduler.py`: Schedules tasks for fetching articles.
 
+## [High Level Details](HLD.md)
+
+[Click here to see HLD](HLD.md)
+
 ## License
 
 NewsTok is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for more details.
