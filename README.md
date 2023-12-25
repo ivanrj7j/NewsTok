@@ -39,6 +39,44 @@ NewsTok is a web-based application developed using Flask, offering users a TikTo
 2. Click on an article to view its full content.
 3. Stay informed with a unique and engaging news-reading experience.
 
+## Source Code Structure
+
+
+
+    |-- components.py (File)
+
+    |-- web
+    |   |-- app.py (File)
+    |   |-- back.py (File)
+    |   |-- front.py (File)
+    |   |-- __init__.py (File)
+    |-- core
+    |   |-- __init__.py (File)
+    |   |-- models
+    |   |   |-- article.py (File)
+    |   |-- workers
+    |   |   |-- businessinsider.py (File)
+    |   |   |-- fetcher.py (File)
+    |   |   |-- scheduler.py (File)
+
+
+The source code is organized into two main parts:
+
+- **web:** Contains the web application code.
+  - `app.py`: Main application file.
+  - `back.py`: Backend blueprint.
+  - `front.py`: Frontend blueprint.
+  - `__init__.py`: Initialization file.
+
+- **core:** Manages core functionalities, independent of the web application.
+  - `__init__.py`: Initialization file.
+  - **models:**
+    - `article.py`: A model for an article, contains essential details and methods related to an article
+  - **workers:**
+    - `businessinsider.py`: Worker for fetching articles from Business Insider.
+    - `fetcher.py`: Generic article fetching functionality. Used as a parent class for other targetted fetchers
+    - `scheduler.py`: Schedules tasks for fetching articles.
+
 ## License
 
 NewsTok is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for more details.
