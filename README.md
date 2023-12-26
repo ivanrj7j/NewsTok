@@ -4,6 +4,9 @@
 
 NewsTok is a web-based application developed using Flask, offering users a TikTok-like scrolling interface for discovering and reading articles and news. The application employs web scraping to gather articles from the internet, storing them in a database. As users scroll through the app, they are presented with article titles and AI-generated shortened content. Clicking on an article reveals its full content.
 
+<div style="display:flex;justify-content:space-between;"><img src="gallery/preview1.png">
+<img src="gallery/preview2.png"></div>
+
 ## Features
 
 - **TikTok-like Interface:** Engage with news and articles in a visually dynamic and user-friendly manner.
