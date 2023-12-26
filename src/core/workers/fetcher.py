@@ -1,4 +1,5 @@
 from aiohttp import ClientSession
+from src.core.models.article import Article
 
 
 class Fetcher:
@@ -14,5 +15,5 @@ class Fetcher:
         response = await self.client.get(self.url, headers={"user-agent": self.userAgent})
         return await response.text()
     
-    async def getArticle(self):
+    async def getArticle(self) -> Article:
         raise NotImplementedError("This method should be implemented by the child")
