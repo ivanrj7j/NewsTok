@@ -5,6 +5,3 @@ from src.web.back import backend
 app = Flask(__name__)
 app.register_blueprint(frontend)
 app.register_blueprint(backend)
-
-if __name__ == '__main__':
-    app.run(debug=True)
