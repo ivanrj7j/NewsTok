@@ -14,7 +14,7 @@ class Searcher:
         self.batchSize = batchSize
 
     def createSearchURL(self, query:str) -> str:
-        raise NotImplementedError("This method should be implemented by the child")
+        return f"{self.baseURL}/{self.searchInterface}{query}"
     
     async def getPage(self, url:str, client:ClientSession):
         response = await client.get(url, headers={"user-agent":self.userAgent})
@@ -28,7 +28,7 @@ class Searcher:
     
     def prepareSchedulers(self, urls:list[str]):
         it = iter(urls)
-        batches = list(lambda: list(islice(it, self.batchSize)), [])
+        batches = iter(lambda: list(islice(it, self.batchSize)), [])
 
         schedulers = list(map(lambda x: self.getScheduler(x), batches))
         return schedulers
@@ -36,7 +36,10 @@ class Searcher:
     async def getArticles(self, query:str):
         searchPage = self.createSearchURL(query)
         async with ClientSession() as client:
-            page = await self.getPage(searchPage, client)
+            return await self.getArticlesFromPage(searchPage, client)
+    
+    async def getArticlesFromPage(self, url:str, client:ClientSession):
+        page = await self.getPage(url, client)
         urls = self.getData(page)
         schedulers = self.prepareSchedulers(urls)
 
@@ -44,5 +47,5 @@ class Searcher:
         for scheduler in schedulers:
             articles += await scheduler.fetch()
 
-        return articles
+        return articles 
 
