@@ -4,6 +4,7 @@ from sumy.summarizers.luhn import LuhnSummarizer as Summarizer
 from sumy.nlp.stemmers import Stemmer
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
+import json
 
 articlesCollection = client["NewsTok"]["articles"]
 # connecting to collection 
@@ -71,4 +72,15 @@ class Article:
                 self.summary += str(sentence) + " "
         
         return self.summary
-        
+    
+    @property
+    def json(self):
+        return json.dumps({
+                "url": self.url,
+                "title": self.title,
+                "content": self.content,
+                "author": self.author,
+                "summary": self.summary,
+                "cover": self.cover,
+                "date": self.date
+            })        
