@@ -42,9 +42,8 @@ NewsTok is a web-based application developed using Flask, offering users a TikTo
 ## Source Code Structure
 
 
-
+```plaintext
     |-- components.py (File)
-
     |-- web
     |   |-- app.py (File)
     |   |-- back.py (File)
@@ -55,9 +54,12 @@ NewsTok is a web-based application developed using Flask, offering users a TikTo
     |   |-- models
     |   |   |-- article.py (File)
     |   |-- workers
-    |   |   |-- businessinsider.py (File)
     |   |   |-- fetcher.py (File)
+    |   |   |-- businessinsider.py (File)
     |   |   |-- scheduler.py (File)
+    |   |   |-- searcher.py (File)
+    |   |   |-- businessinsiderSearcher.py (File)
+```
 
 
 The source code is organized into two main parts:
@@ -76,6 +78,8 @@ The source code is organized into two main parts:
     - `businessinsider.py`: Worker for fetching articles from Business Insider.
     - `fetcher.py`: Generic article fetching functionality. Used as a parent class for other targetted fetchers
     - `scheduler.py`: Schedules tasks for fetching articles.
+    - `searcher.py`: Parent class for searching any website for articles.
+    - `businessinsiderSearcher.py`: Specialized searcher for [Business Insider](https://www.businessinsider.in/).
 
 ## [High Level Details](HLD.md)
 

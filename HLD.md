@@ -2,12 +2,12 @@
 
 ## Overview
 
-NewsTok is a Flask-based web application that provides users with an interactive and engaging news-reading experience. The project architecture is divided into two main components: **web** and **core**. The web component manages the frontend and backend of the application, while the core component handles essential functionalities independently.
+NewsTok is a Flask-based web application that offers users a TikTok-like scrolling interface for reading articles and news. The project structure is organized into two main components: **web** and **core**. The web component manages the frontend and backend, while the core component handles essential functionalities independently.
 
-## Structure
+## Folder Structure
 
+```plaintext
     |-- components.py (File)
-
     |-- web
     |   |-- app.py (File)
     |   |-- back.py (File)
@@ -18,11 +18,23 @@ NewsTok is a Flask-based web application that provides users with an interactive
     |   |-- models
     |   |   |-- article.py (File)
     |   |-- workers
-    |   |   |-- businessinsider.py (File)
     |   |   |-- fetcher.py (File)
+    |   |   |-- businessinsider.py (File)
     |   |   |-- scheduler.py (File)
+    |   |   |-- searcher.py (File)
+    |   |   |-- businessinsiderSearcher.py (File)
+```
+
+This structure reflects the organization of the NewsTok project, providing clarity on the location of key files and components within the codebase.
 
 ## Web Component
+
+### `components.py`
+
+- **Description:**
+  - A file within the project, possibly handling shared components or utilities.
+- **Role:**
+  - Provides additional functionalities or shared utilities.
 
 ### `web/app.py`
 
@@ -36,7 +48,7 @@ NewsTok is a Flask-based web application that provides users with an interactive
 - **Description:**
   - Backend blueprint defining core server-side functionalities.
 - **Role:**
-  - Manages backend operations.
+  - Manages backend operations, including article fetching and AI summarization.
 
 ### `web/front.py`
 
@@ -93,6 +105,23 @@ NewsTok is a Flask-based web application that provides users with an interactive
 - **Role:**
   - Enhances efficiency by managing the timing of article fetches.
 
+### `core/workers/searcher.py`
+
+- **Description:**
+  - Parent class for searching any website for articles.
+- **Role:**
+  - Looks through a website and extracts articles using fetchers.
+- **Note:**
+  - Meant to be extended for specific websites.
+
+### `core/workers/businessinsiderSearcher.py`
+
+- **Description:**
+  - Specialized searcher for [Business Insider](https://www.businessinsider.in/).
+- **Role:**
+  - Inherits from the `searcher.py` parent class.
+  - Utilizes Business Insider-specific fetchers for article extraction.
+
 ## Miscellaneous
 
 ### `components.py`
@@ -104,4 +133,4 @@ NewsTok is a Flask-based web application that provides users with an interactive
 
 ## Note
 
-This detailed overview outlines the roles and responsibilities of each component, ensuring a clear understanding of the project's structure and functionality.
+This updated overview outlines the roles and responsibilities of each component, considering the new files added to the project structure.
