@@ -46,15 +46,7 @@ class Article:
         Registers the article to the database
         """
         if articlesCollection.find_one({"url": self.url}) is None:
-            articlesCollection.insert_one({
-                "url": self.url,
-                "title": self.title,
-                "content": self.content,
-                "author": self.author,
-                "summary": self.summary,
-                "cover": self.cover,
-                "date": self.date
-            })  
+            articlesCollection.insert_one(json.loads(self.json))  
 
     def getSummary(self, sentences=4, language="english"):
         """
