@@ -1,7 +1,6 @@
 from typing import Type
 from aiohttp import ClientSession
 import asyncio
-import json
 
 class FetcherScheduler:
     """
