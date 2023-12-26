@@ -3,7 +3,7 @@ from bson import ObjectId
 from sumy.summarizers.luhn import LuhnSummarizer as Summarizer
 from sumy.nlp.stemmers import Stemmer
 from sumy.nlp.tokenizers import Tokenizer
-from sumy.parsers.plaintext import PlaintextParser
+from sumy.parsers.html import HtmlParser
 import json
 
 articlesCollection = client["NewsTok"]["articles"]
@@ -48,13 +48,13 @@ class Article:
         if articlesCollection.find_one({"url": self.url}) is None:
             articlesCollection.insert_one(json.loads(self.json))  
 
-    def getSummary(self, sentences=4, language="english"):
+    def getSummary(self, sentences=3, language="english"):
         """
         Returns the summary of the article, if it does not already exist, 
         """
         
         if self.summary is None or self.summary == "":
-            parser = PlaintextParser.from_string(self.content, Tokenizer(language))
+            parser = HtmlParser.from_string(self.content,self.url, Tokenizer(language))
             stemmer = Stemmer(language)
             summarizer = Summarizer(stemmer)
 
