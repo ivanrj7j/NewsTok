@@ -1,6 +1,7 @@
 from typing import Type
 from aiohttp import ClientSession
 import asyncio
+import json
 
 class FetcherScheduler:
     """
@@ -24,3 +25,7 @@ class FetcherScheduler:
                     jobs.append(asyncio.ensure_future(fetcher.getArticle()))
 
                 await asyncio.gather(*jobs)
+
+    @property
+    def scheduledTasksLength(self):
+        return len(self.urls)
