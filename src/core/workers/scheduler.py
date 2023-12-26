@@ -24,3 +24,7 @@ class FetcherScheduler:
                     jobs.append(asyncio.ensure_future(fetcher.getArticle()))
 
                 await asyncio.gather(*jobs)
+
+    @property
+    def scheduledTasksLength(self):
+        return len(self.urls)
